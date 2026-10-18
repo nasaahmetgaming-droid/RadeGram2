@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: radegram
+    runtime: python
+    plan: free
+    buildCommand: "pip install -r requirements.txt && python -m compileall -q app.py"
+    startCommand: "python app.py"
+    healthCheckPath: /api/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.8
+      - key: VYRO_HOST
+        value: 0.0.0.0
+      - key: VYRO_SECURE_COOKIE
+        value: "1"
+      - key: RADEGRAM_OPEN_BROWSER
+        value: "0"
+      - key: VYRO_MAX_UPLOAD_MB
+        value: "50"
+      - key: DATABASE_URL
+        sync: false
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false
